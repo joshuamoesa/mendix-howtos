@@ -3,7 +3,47 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, nocache, max-snippet:0, max-image-preview:none, max-video-preview:0" />
+		<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, max-snippet:0, max-image-preview:none, max-video-preview:0" />
+		<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
+		<meta name="slurp" content="noindex, nofollow, noarchive, nosnippet" />
+		<meta name="duckduckbot" content="noindex, nofollow, noarchive, nosnippet" />
+		<meta name="referrer" content="no-referrer" />
 		<title>SIEMENS Mendix AI Experience - Digital Workshop Room</title>
+		<script>
+			(function () {
+				var consentKey = 'analytics_consent';
+				var gaId = 'G-LRJTK25SHP';
+				var analyticsLoaded = false;
+
+				window.loadAnalyticsIfConsented = function () {
+					if (analyticsLoaded) {
+						return;
+					}
+					analyticsLoaded = true;
+
+					window.dataLayer = window.dataLayer || [];
+					window.gtag = function () {
+						dataLayer.push(arguments);
+					};
+					gtag('js', new Date());
+					gtag('config', gaId);
+
+					var gaScript = document.createElement('script');
+					gaScript.async = true;
+					gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+					document.head.appendChild(gaScript);
+				};
+
+				window.getAnalyticsConsent = function () {
+					return localStorage.getItem(consentKey);
+				};
+
+				window.setAnalyticsConsent = function (value) {
+					localStorage.setItem(consentKey, value);
+				};
+			})();
+		</script>
 		<style>
 			.tile-link {
 				transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
@@ -19,6 +59,54 @@
 				outline: 2px solid #4fcfd5;
 				outline-offset: 2px;
 			}
+
+			.consent-banner {
+				position: fixed;
+				left: 16px;
+				right: 16px;
+				bottom: 16px;
+				background: #ffffff;
+				border: 1px solid #d0d0d0;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+				padding: 12px;
+				z-index: 9999;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 10px;
+			}
+
+			.consent-banner p {
+				margin: 0;
+				font-size: 13px;
+				line-height: 1.4;
+				color: #333;
+				flex: 1 1 280px;
+			}
+
+			.consent-actions {
+				display: flex;
+				gap: 8px;
+			}
+
+			.consent-btn {
+				border: 1px solid #c4c4c4;
+				background: #f5f5f5;
+				color: #333;
+				padding: 7px 12px;
+				font-size: 12px;
+				cursor: pointer;
+			}
+
+			.consent-btn.primary {
+				background: #0f9a9f;
+				border-color: #0f9a9f;
+				color: #fff;
+			}
+
+			.hidden {
+				display: none;
+			}
 		</style>
 	</head>
 	<body style="margin:0; background:#efefef; font-family:Arial, Helvetica, sans-serif; color:#333;">
@@ -26,7 +114,7 @@
 			style="max-width:980px; margin:16px auto; background:#f7f7f7; border:1px solid #ddd; box-shadow:0 1px 2px rgba(0,0,0,0.05);"
 		>
 			<div style="padding:10px 16px; font-size:14px; color:#666; background:#f0f0f0; border-bottom:1px solid #ddd;">
-				<strong>Engagement from Siemens DI SW</strong>
+				<strong>Mendix AI Experience 11.12 | Workshop Hub | 13 Jul 2026</strong>
 			</div>
 
 			<div style="padding:22px 18px 10px 18px;">
@@ -104,13 +192,50 @@
 					</div>
 				</div>
 
-				<div style="margin-top:28px; background:#ececec; border:1px solid #d8d8d8; padding:14px 12px; display:flex; align-items:center; gap:12px;">
-					<div>
-						<div style="font-size:30px; color:#444; margin-bottom:4px;">Joshua Moesa</div>
-						<div style="font-size:14px; color:#0093a3;">joshua.moesa@siemens.com</div>
-					</div>
+				<div style="margin-top:10px; background:#f2f2f2; border:1px solid #d8d8d8; padding:12px; font-size:12px; line-height:1.5; color:#666;">
+					<div style="font-weight:700; color:#4d4d4d; margin-bottom:4px;">Licensing Notice</div>
+					<div>Copyright (c) Siemens 2026. All rights reserved.</div>
+					<div>This workshop content is provided for internal enablement use only and may not be redistributed externally without prior written approval from Siemens.</div>
 				</div>
+			</div> 
+		</div>
+
+		<div id="consent-banner" class="consent-banner hidden" role="dialog" aria-live="polite" aria-label="Analytics consent banner">
+			<p>This site uses Google Analytics to improve the workshop experience. Allow anonymous usage analytics?</p>
+			<div class="consent-actions">
+				<button id="consent-decline" class="consent-btn" type="button">Decline</button>
+				<button id="consent-accept" class="consent-btn primary" type="button">Accept</button>
 			</div>
 		</div>
+
+		<script>
+			(function () {
+				var banner = document.getElementById('consent-banner');
+				var acceptBtn = document.getElementById('consent-accept');
+				var declineBtn = document.getElementById('consent-decline');
+
+				function hideBanner() {
+					banner.classList.add('hidden');
+				}
+
+				var consent = window.getAnalyticsConsent();
+				if (consent === 'accepted') {
+					window.loadAnalyticsIfConsented();
+				} else if (consent !== 'declined') {
+					banner.classList.remove('hidden');
+				}
+
+				acceptBtn.addEventListener('click', function () {
+					window.setAnalyticsConsent('accepted');
+					window.loadAnalyticsIfConsented();
+					hideBanner();
+				});
+
+				declineBtn.addEventListener('click', function () {
+					window.setAnalyticsConsent('declined');
+					hideBanner();
+				});
+			})();
+		</script>
 	</body>
 </html>
