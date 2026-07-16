@@ -7,11 +7,36 @@ description: Applies a comprehensive dark mode theme to Mendix apps using Atlas 
 
 This skill defines a full dark mode color scheme for Mendix Atlas UI 3 apps, matching shadcn/ui's pure-black dark aesthetic. The base canvas is true black (`#000000`), cards and surfaces sit at near-black (`#09090b`), and borders are barely visible (`#18181b`). Primary buttons are inverted (white on black).
 
+## Toggle Mechanism
+
+Dark mode is controlled by a single SCSS variable at the top of `theme/web/custom-variables.scss`:
+
+```scss
+$dark-mode: true;   // Set to false to disable dark mode
+```
+
+All dark mode variable overrides and the `:root` block are wrapped in an `@if $dark-mode { }` conditional. When `$dark-mode` is `false`, no overrides are applied and Atlas falls back to its default light theme.
+
+### Enabling dark mode
+
+1. Set `$dark-mode: true;` at the top of `custom-variables.scss` (or add it if missing)
+2. Ensure the `@if $dark-mode { ... }` block with all overrides exists below it
+
+### Disabling dark mode
+
+1. Set `$dark-mode: false;` — no other changes needed, the `@if` block is skipped entirely
+
+### Checking current state
+
+Read `custom-variables.scss` and look for `$dark-mode:`. If it is `true`, dark mode is active. If it is `false` or absent, dark mode is off.
+
 ## How to Apply
 
 Override SCSS variables in `theme/web/custom-variables.scss`. Atlas uses `$variable-name` SCSS variables with `!default` flags, so any value you set in `custom-variables.scss` takes precedence over the core defaults.
 
-Because $use-css-variables: true is set, Atlas resolves colours from CSS custom properties at runtime — SCSS $variable overrides alone are not enough. Always add a full :root { } block that mirrors every SCSS variable as a CSS custom property. Without it, Atlas's default :root values win and the theme appears grey.
+Because `$use-css-variables: true` is set, Atlas resolves colours from CSS custom properties at runtime — SCSS `$variable` overrides alone are not enough. Always add a full `:root { }` block that mirrors every SCSS variable as a CSS custom property. Without it, Atlas's default `:root` values win and the theme appears grey.
+
+Both the SCSS overrides and the `:root` block must be inside the `@if $dark-mode { }` conditional so they are only applied when dark mode is enabled.
 
 Before writing: Always read the full `custom-variables.scss` file first. Identify the existing variable declarations and insert or replace them. Never delete unrelated variables or replace the entire file unless it is empty.
 

@@ -2,11 +2,20 @@
 
 Copy and paste this block into `theme/web/custom-variables.scss`, replacing any existing values for the same variables.
 
-> **IMPORTANT — CSS variables:** Because `$use-css-variables: true` is set in Atlas, SCSS `$variable` overrides alone are not enough. Atlas resolves colours from CSS custom properties at runtime, so the default `:root` values win otherwise (causing a grey appearance). Always accompany the SCSS block below with a full `:root { }` block that mirrors every variable as a CSS custom property. See the `:root` block at the bottom of this file.
+> **IMPORTANT — Toggle:** The `$dark-mode` variable at the top controls whether dark mode is active. Set it to `true` to enable or `false` to disable. All overrides and the `:root` block are wrapped in `@if $dark-mode { }` so they only apply when enabled.
+
+> **IMPORTANT — CSS variables:** Because `$use-css-variables: true` is set in Atlas, SCSS `$variable` overrides alone are not enough. Atlas resolves colours from CSS custom properties at runtime, so the default `:root` values win otherwise (causing a grey appearance). The `:root` block at the bottom of this file is included inside the `@if` conditional.
 
 > **Border colour:** All borders use `rgba(255, 255, 255, 0.15)` — white at 15% opacity — matching the shadcn/ui dark mode `--input` token (`oklch(1 0 0 / 15%)`). This gives the characteristic subtle grey-ish border on a black surface.
 
 ```scss
+// ============================================================
+// DARK MODE TOGGLE
+// Set to true to enable dark mode, false to disable
+// ============================================================
+$dark-mode: true;
+
+@if $dark-mode {
 // ============================================================
 // DARK MODE THEME — Pure black, shadcn/ui inspired
 // Base: #000000 | Surface: #09090b | Border: rgba(255,255,255,0.15)
@@ -235,13 +244,8 @@ $wizard-default-border-color: rgba(255, 255, 255, 0.15);
 //== Timeline
 $timeline-border-color: rgba(255, 255, 255, 0.15);
 $timeline-grouping-border-color: rgba(255, 255, 255, 0.15);
-```
 
-##:root block (required)
-
-Because $use-css-variables: true, Atlas resolves colours from CSS custom properties at runtime. The SCSS variables above are not enough on their own — you must also add this :root { } block to custom-variables.scss. Without it, Atlas's default grey :root values override everything.
-
-```css
+// == :root block (required when $use-css-variables: true)
 :root {
   /* Brand Colors */
   --brand-primary: #fafafa;
@@ -467,4 +471,6 @@ Because $use-css-variables: true, Atlas resolves colours from CSS custom propert
   --timeline-border-color: rgba(255, 255, 255, 0.15);
   --timeline-grouping-border-color: rgba(255, 255, 255, 0.15);
 }
+
+} // end @if $dark-mode
 ```

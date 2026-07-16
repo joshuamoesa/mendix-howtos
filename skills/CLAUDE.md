@@ -18,7 +18,7 @@ Comprehensive dark mode theme for Mendix Atlas UI 3, inspired by shadcn/ui's pur
 
 ### Activation
 
-The dark mode theme is controlled by a `dark-mode: true/false` setting. When set to `true`, the dark mode styling becomes active in both the running Mendix app and the Mendix Studio Pro IDE.
+Dark mode is controlled by a `$dark-mode: true/false` SCSS variable at the top of `custom-variables.scss`. All overrides and the `:root` block are wrapped in `@if $dark-mode { }`, so setting it to `false` cleanly disables dark mode without removing any code.
 
 ### Design Decisions
 
