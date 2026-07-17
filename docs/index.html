@@ -96,10 +96,19 @@
 			}
 
 			.brand-mark {
-				font-size: 36px;
-				letter-spacing: 0.04em;
-				color: var(--siemens-petrol);
+				display: inline-block;
+				padding: 0;
+				background: transparent;
+				border-radius: 0;
+				font-family: "Helvetica Neue", Arial, sans-serif;
+				font-size: clamp(28px, 3vw, 42px);
+				line-height: 0.9;
+				letter-spacing: 0.03em;
+				color: #00b1b8;
 				font-weight: 700;
+				text-transform: uppercase;
+				white-space: nowrap;
+				box-shadow: none;
 			}
 
 			.page-title {
@@ -113,34 +122,171 @@
 			}
 
 			.hero-banner {
-				height: 126px;
+				min-height: 0;
 				border: 1px solid var(--siemens-gray-lighter);
 				background: linear-gradient(135deg, var(--siemens-gray-dark) 0%, #003b3b 50%, var(--siemens-petrol) 100%);
-				position: relative;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				gap: 18px;
+				padding: 12px 24px;
 				overflow: hidden;
 				margin-bottom: 26px;
 			}
 
 			.hero-subtitle {
-				position: absolute;
-				left: 24px;
-				top: 45px;
 				color: #fff;
-				font-size: 20px;
+				font-size: clamp(16px, 2vw, 20px);
 				font-weight: 400;
-				max-width: 56%;
+				max-width: 58%;
+				align-self: flex-start;
 			}
 
 			.hero-title {
-				position: absolute;
-				right: 24px;
-				top: 16px;
 				color: #fff;
-				font-size: 42px;
+				font-size: clamp(28px, 4.2vw, 42px);
 				font-weight: 700;
 				text-align: right;
 				line-height: 0.95;
-				max-width: 43%;
+				max-width: 40%;
+				margin-left: auto;
+			}
+
+			.workbook-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 22px;
+				margin-bottom: 20px;
+			}
+
+			.workbook-card {
+				background: #fff;
+				border: 2px solid var(--card-accent);
+				border-radius: 18px;
+				overflow: hidden;
+				box-shadow: 0 10px 22px rgba(25, 25, 25, 0.1);
+				transition: transform 150ms ease, box-shadow 150ms ease;
+			}
+
+			.workbook-card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 16px 30px rgba(25, 25, 25, 0.15);
+			}
+
+			.workbook-head {
+				position: relative;
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				padding: 10px 12px;
+				background: var(--card-bg);
+			}
+
+			.workbook-cover {
+				width: 48px;
+				height: 68px;
+				border-radius: 6px;
+				box-shadow: 0 8px 14px rgba(25, 25, 25, 0.2);
+				background: linear-gradient(135deg, var(--cover-1) 0%, var(--cover-2) 100%);
+				color: #fff;
+				display: flex;
+				align-items: flex-end;
+				font-size: 9px;
+				font-weight: 700;
+				padding: 4px;
+				line-height: 1.1;
+			}
+
+			.workbook-heading {
+				font-size: 26px;
+				line-height: 1;
+				font-weight: 800;
+				letter-spacing: -0.03em;
+				color: #0f1a2f;
+			}
+
+			.workbook-time {
+				position: absolute;
+				right: 8px;
+				top: 5px;
+				background: #0b1730;
+				color: #fff;
+				font-size: 12px;
+				font-weight: 700;
+				line-height: 1;
+				padding: 5px 8px;
+				border-radius: 999px;
+			}
+
+			.workbook-body {
+				padding: 20px 20px 18px;
+			}
+
+			.workbook-title {
+				margin: 0 0 12px;
+				font-size: 48px;
+				font-weight: 800;
+				letter-spacing: -0.03em;
+				text-align: center;
+				color: #0f1a2f;
+			}
+
+			.workbook-topics {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+
+			.workbook-topics li {
+				font-size: 18px;
+				font-weight: 500;
+				letter-spacing: -0.01em;
+				color: #1c2437;
+				line-height: 1.25;
+				margin-bottom: 8px;
+			}
+
+			.workbook-links {
+				margin-top: 14px;
+				display: flex;
+				justify-content: center;
+				gap: 8px;
+				flex-wrap: wrap;
+			}
+
+			.workbook-links a {
+				display: inline-block;
+				padding: 6px 10px;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--siemens-petrol-dark);
+				border: 1px solid var(--siemens-gray-lighter);
+				border-radius: 999px;
+				text-decoration: none;
+				background: #fff;
+			}
+
+			.card-one {
+				--card-accent: #2d6bff;
+				--card-bg: #d8e4f6;
+				--cover-1: #1d2fe3;
+				--cover-2: #5f74ff;
+			}
+
+			.card-two {
+				--card-accent: #27c7c3;
+				--card-bg: #d7f1f0;
+				--cover-1: #00a651;
+				--cover-2: #00c462;
+			}
+
+			.card-three {
+				--card-accent: #e20015;
+				--card-bg: #f8dadd;
+				--cover-1: #df0a0a;
+				--cover-2: #ff3c3c;
 			}
 
 			.section {
@@ -299,8 +445,29 @@
 					max-width: none;
 				}
 
+				.hero-banner {
+					padding: 14px 16px;
+					gap: 10px;
+					flex-direction: column;
+				}
+
 				.hero-title {
 					font-size: 32px;
+					text-align: left;
+					margin-left: 0;
+				}
+
+				.workbook-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.workbook-title,
+				.workbook-heading {
+					font-size: 44px;
+				}
+
+				.workbook-topics li {
+					font-size: 17px;
 				}
 			}
 		</style>
@@ -328,59 +495,75 @@
 					</div>
 				</div>
 
-				<div class="section">
-					<div class="section-title">Workbook 1</div>
-					<div class="section-divider"></div>
-					<div class="tile-grid">
-						<a class="tile-link" href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%201%20v3.1.pdf" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							<div style="height:104px; background:#2d39cf; color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700;">Workbook</div>
-							<div class="tile-name">Mendix AI Experience 2026 Mx11.12 - Workbook 1 v3.1</div>
-							<div class="tile-filetype">PDF</div>
-						</a>
-						<a class="tile-link" href="ANWB%20Fietsverzekering%20Voorwaarden.pdf" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							<div style="height:104px; background:linear-gradient(135deg,#b0d541,#f0ef63 50%, #53a7d8); display:flex; align-items:center; justify-content:center; color:#0f5f6b; font-size:16px; font-weight:700;">Doc</div>
-							<div class="tile-name">ANWB Fietsverzekering voorwaarden</div>
-							<div class="tile-filetype">PDF</div>
-						</a>
+				<div class="workbook-grid">
+					<div class="workbook-card card-one">
+						<div class="workbook-head">
+							<div class="workbook-cover">AI Experience</div>
+							<div class="workbook-heading">Workbook 1</div>
+							<div class="workbook-time">30m</div>
+						</div>
+						<div class="workbook-body">
+							<ul class="workbook-topics">
+								<li>AI Bot Starter App</li>
+								<li>Conversational UI</li>
+								<li>Token Monitoring</li>
+								<li>GenAI Commons</li>
+								<li>Mendix Cloud GenAI Resource Packs (Models &amp; Embeddings)</li>
+							</ul>
+							<div class="workbook-links">
+								<a href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%201%20v3.1.pdf" target="_blank" rel="noopener noreferrer">Open Workbook</a>
+								<a href="ANWB%20Fietsverzekering%20Voorwaarden.pdf" target="_blank" rel="noopener noreferrer">Reference PDF</a>
+							</div>
+						</div>
 					</div>
-				</div>
 
-				<div class="section">
-					<div class="section-title">Workbook 2</div>
-					<div class="section-divider"></div>
-					<div class="tile-grid">
-						<a class="tile-link" href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%202%20v3.1.pdf" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							<div style="height:104px; background:#08a748; color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700;">Workbook</div>
-							<div class="tile-name">Mendix AI Experience 2026 Mx11.12 - Workbook 2 v3.1</div>
-							<div class="tile-filetype">PDF</div>
-						</a>
-						<a class="tile-link" href="https://view.highspot.com/viewer/e1b505bcf3c45fd2433ad5ac4a3994b6" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							  <div style="height:104px; display:flex; align-items:center; justify-content:center; background:#dce4ef; color:#7d8ea7; font-size:26px; font-weight:700; letter-spacing:1px;">Docs</div>
-							<div class="tile-name">Manuals</div>
-							<div class="tile-filetype">ZIP</div>
-						</a>
-						<a class="tile-link" href="ChatContext_ChatWithHistory_ActionMicroflow_MxGenAI_RAG_1112.mpk.zip" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							  <div style="height:104px; display:flex; align-items:center; justify-content:center; background:#dce4ef; color:#7d8ea7; font-size:26px; font-weight:700; letter-spacing:1px;">Solution</div>
-							<div class="tile-name">ChatContext ChatWithHistory ActionMicroflow ...</div>
-							<div class="tile-filetype">ZIP</div>
-						</a>
+					<div class="workbook-card card-two">
+						<div class="workbook-head">
+							<div class="workbook-cover">AI Experience</div>
+							<div class="workbook-heading">Workbook 2</div>
+							<div class="workbook-time">30m</div>
+						</div>
+						<div class="workbook-body">
+							<ul class="workbook-topics">
+								<li>Mendix Knowledge Base</li>
+								<li>Embeddings &amp; Vector Search</li>
+								<li>Conversational UI</li>
+								<li>GenAI Microflows &amp; Orchestration</li>
+								<li>Mendix Cloud GenAI Resource Packs (Models, Knowledge Base &amp; Embeddings)</li>
+								<li>Source-Grounded AI Responses</li>
+							</ul>
+							<div class="workbook-links">
+								<a href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%202%20v3.1.pdf" target="_blank" rel="noopener noreferrer">Open Workbook</a>
+								<a href="https://view.highspot.com/viewer/e1b505bcf3c45fd2433ad5ac4a3994b6" target="_blank" rel="noopener noreferrer">Manuals Zip</a>
+								<a href="ChatContext_ChatWithHistory_ActionMicroflow_MxGenAI_RAG_1112.mpk.zip" target="_blank" rel="noopener noreferrer">Solution Zip</a>
+							</div>
+						</div>
 					</div>
-				</div>
 
-				<div class="section">
-					<div class="section-title">Workbook 3</div>
-					<div class="section-divider"></div>
-					<div class="tile-grid">
-						<a class="tile-link" href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%203%20v3.1.pdf" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							<div style="height:104px; background:#d80a0a; color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700;">Workbook</div>
-							<div class="tile-name">Mendix AI Experience 2026 Mx11.12 - Workbook 3 v3.1</div>
-							<div class="tile-filetype">PDF</div>
-						</a>
-						<a class="tile-link" href="MCPServer_AuthorizeUser_Dummy.mpk.zip" target="_blank" rel="noopener noreferrer" style="width:135px; background:#e9e9e9; border:1px solid #d2d2d2; display:block; text-decoration:none; color:inherit;">
-							  <div style="height:104px; display:flex; align-items:center; justify-content:center; background:#dce4ef; color:#7d8ea7; font-size:26px; font-weight:700; letter-spacing:1px;">Solution</div>
-							<div class="tile-name">MCPServer AuthorizeUser Dummy.mpk</div>
-							<div class="tile-filetype">ZIP</div>
-						</a>
+					<div class="workbook-card card-three">
+						<div class="workbook-head">
+							<div class="workbook-cover">AI Experience</div>
+							<div class="workbook-heading">Workbook 3</div>
+							<div class="workbook-time">40m</div>
+						</div>
+						<div class="workbook-body">
+							<ul class="workbook-topics">
+								<li>Agent Builder Starter App</li>
+								<li>Agentic AI Applications</li>
+								<li>Agent Builder Configuration</li>
+								<li>Knowledge Bases for Agents</li>
+								<li>Tool Calling / Function Calling</li>
+								<li>Agent Testing &amp; Evaluation</li>
+								<li>Agent Editor in Studio Pro</li>
+								<li>Mendix Cloud GenAI Resource Packs (Models, Knowledge Base &amp; Embeddings)</li>
+								<li>MCP (Model Context Protocol) Client / Server</li>
+								<li>Claude Desktop / Claude Code Integration</li>
+							</ul>
+							<div class="workbook-links">
+								<a href="Mendix%20AI%20Experience%202026%20Mx1112%20-%20Workbook%203%20v3.1.pdf" target="_blank" rel="noopener noreferrer">Open Workbook</a>
+								<a href="MCPServer_AuthorizeUser_Dummy.mpk.zip" target="_blank" rel="noopener noreferrer">Solution Zip</a>
+							</div>
+						</div>
 					</div>
 				</div>
 
